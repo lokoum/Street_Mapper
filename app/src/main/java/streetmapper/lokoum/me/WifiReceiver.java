@@ -36,7 +36,7 @@ public class WifiReceiver extends BroadcastReceiver {
                 else {
                     type = "WPA";
                 }
-                APView.values.add(new AP(next.SSID, next.level, type, true, 0, 0));
+                APView.values.add(new AP(next.BSSID, next.SSID, next.level, type, true, 0, 0));
                 APView.listAdapter.notifyDataSetChanged();
             }
 

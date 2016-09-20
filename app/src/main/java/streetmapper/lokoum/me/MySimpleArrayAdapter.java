@@ -23,8 +23,8 @@ public class MySimpleArrayAdapter extends ArrayAdapter<AP> {
         this.context = context;
     }
 
-    public MySimpleArrayAdapter(Context context, int resource, List<AP> values) {
-        super(context, resource, values);
+    public MySimpleArrayAdapter(Context context, int resource, int id, List<AP> values) {
+        super(context, resource, id, values);
         this.context = context;
         this.values = values;
     }
@@ -37,7 +37,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<AP> {
         TextView ssid = (TextView) rowView.findViewById(R.id.ssid);
         TextView info = (TextView) rowView.findViewById(R.id.info);
         ssid.setText(values.get(position).getSSID());
-        info.setText(values.get(position).getType() + "  Strength: " + values.get(position).getLevel() + " WPS:" + values.get(position).getWPS());
+        info.setText(values.get(position).getType() + "  Strength: " + values.get(position).getLevel() + " WPS:" + values.get(position).getWPS() + "  " + values.get(position).getBSSID());
         if (values.get(position).getType().equalsIgnoreCase("wep")) {
             rowView.setBackgroundColor(Color.GREEN);
         }

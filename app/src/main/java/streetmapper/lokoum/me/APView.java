@@ -31,7 +31,7 @@ public class APView extends Fragment {
         ap_list = (ListView) v.findViewById(R.id.ap_list);
         values = new ArrayList<>();
         listAdapter = new MySimpleArrayAdapter(getActivity(),
-                R.layout.list_layout, values);
+                R.layout.list_layout, R.id.ssid , values);
 
 
         if (MainActivity.wifi.isWifiEnabled() == false) {

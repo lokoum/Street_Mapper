@@ -5,6 +5,7 @@ package streetmapper.lokoum.me;
  */
 public class AP {
 
+    private String bssid;
     private String ssid;
     private int level;
     private String type;
@@ -12,7 +13,8 @@ public class AP {
     private double loc_lat;
     private double loc_lon;
 
-    public AP(String ssid, int level, String type, boolean wps, double loc_lat, double loc_lon) {
+    public AP(String bssid, String ssid, int level, String type, boolean wps, double loc_lat, double loc_lon) {
+        this.bssid = bssid;
         this.ssid = ssid;
         this.level = level;
         this.type = type;
@@ -22,6 +24,10 @@ public class AP {
     }
 
     //SETTERS
+    public void setBSSID(String bssid) {
+        this.bssid = bssid;
+    }
+
     public void setSSID(String ssid) {
         this.ssid = ssid;
     }
@@ -47,6 +53,10 @@ public class AP {
     }
 
     //GETTERS
+    public String getBSSID() {
+        return this.bssid;
+    }
+
     public String getSSID() {
         return this.ssid;
     }
