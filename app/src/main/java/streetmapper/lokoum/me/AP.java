@@ -10,10 +10,10 @@ public class AP {
     private int level;
     private String type;
     private boolean wps;
-    private double loc_lat;
-    private double loc_lon;
+    private int loc_lat;
+    private int loc_lon;
 
-    public AP(String bssid, String ssid, int level, String type, boolean wps, double loc_lat, double loc_lon) {
+    public AP(String bssid, String ssid, int level, String type, boolean wps, int loc_lat, int loc_lon) {
         this.bssid = bssid;
         this.ssid = ssid;
         this.level = level;
@@ -44,11 +44,11 @@ public class AP {
         this.wps = wps;
     }
 
-    public void setLoc_lat(double loc_lat) {
+    public void setLoc_lat(int loc_lat) {
         this.loc_lat = loc_lat;
     }
 
-    public void setLoc_lon(double loc_lon) {
+    public void setLoc_lon(int loc_lon) {
         this.loc_lon = loc_lon;
     }
 
@@ -73,11 +73,11 @@ public class AP {
         return this.wps;
     }
 
-    public double getLoc_lat() {
+    public int getLoc_lat() {
         return this.loc_lat;
     }
 
-    public double getLoc_lon() {
+    public int getLoc_lon() {
         return this.loc_lon;
     }
 }

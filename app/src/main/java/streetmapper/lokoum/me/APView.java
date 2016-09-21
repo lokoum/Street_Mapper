@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,18 +21,20 @@ import java.util.List;
 public class APView extends Fragment {
 
 
-    public static List<AP> values;
-    public static ListView ap_list ;
-    public static ArrayAdapter<AP> listAdapter ;
+    public static List<AP> list_a;
+    public static ListView ap_list;
+    public static ArrayAdapter<AP> list_a_adapt;
+    public static TextView textView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.acces_point, container, false);
 
         ap_list = (ListView) v.findViewById(R.id.ap_list);
-        values = new ArrayList<>();
-        listAdapter = new MySimpleArrayAdapter(getActivity(),
-                R.layout.list_layout, R.id.ssid , values);
+        list_a = new ArrayList<>();
+        list_a_adapt = new MySimpleArrayAdapter(getActivity(),
+                R.layout.list_layout, R.id.ssid , list_a);
+        textView = (TextView) v.findViewById(R.id.debug);
 
 
         if (MainActivity.wifi.isWifiEnabled() == false) {
@@ -48,7 +51,7 @@ public class APView extends Fragment {
         Toast.makeText(getActivity(), "Starting Scan...",
                 Toast.LENGTH_LONG).show();
 
-        ap_list.setAdapter(listAdapter);
+        APView.ap_list.setAdapter(APView.list_a_adapt);
 
         return v;
     }

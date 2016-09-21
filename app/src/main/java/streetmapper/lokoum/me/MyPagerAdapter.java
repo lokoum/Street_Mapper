@@ -22,13 +22,14 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
                 MapFragment fm =   new MapFragment();
                 return fm;
             case 1: return new APView();
+            case 2: return new APGlobal();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -36,7 +37,11 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         if (position == 0) {
             return ("Map");
         }
-        else
-            return ("AP list");
+        else if (position == 1) {
+            return ("Actual list");
+        }
+        else {
+            return ("Global list");
+        }
     }
 }

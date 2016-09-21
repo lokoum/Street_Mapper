@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                     ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
+                    pager.setOffscreenPageLimit(3);
                     pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
                 } else {

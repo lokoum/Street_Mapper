@@ -44,8 +44,11 @@ public class MySimpleArrayAdapter extends ArrayAdapter<AP> {
         else if (values.get(position).getType().equalsIgnoreCase("wpa2")) {
             rowView.setBackgroundColor(Color.RED);
         }
-        else {
+        else if (values.get(position).getType().equalsIgnoreCase("wpa")) {
             rowView.setBackgroundColor(Color.YELLOW);
+        }
+        else {
+            rowView.setBackgroundColor(Color.WHITE);
         }
         return rowView;
     }

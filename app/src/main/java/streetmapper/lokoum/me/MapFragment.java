@@ -15,6 +15,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -44,15 +45,18 @@ public class MapFragment extends Fragment implements
     private MapView map;
     private IMapController mapController;
     private LocationManager mLocMgr;
-    int mLongtitude = 31987968;
-    int mLatitude = 34783155;
-    boolean first = true;
+    public static int mLongtitude = 31987968;
+    public static int mLatitude = 34783155;
+    public static boolean first = true;
     ArrayList<OverlayItem> mItems;
+
+    TextView textView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.map, container, false);
 
+        textView = (TextView) v.findViewById(R.id.debug);
         //important! set your user agent to prevent getting banned from the osm servers
         org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
 
@@ -82,6 +86,7 @@ public class MapFragment extends Fragment implements
     public void onLocationChanged(Location location) {
         mLatitude = (int) (location.getLatitude() * 1E6);
         mLongtitude = (int) (location.getLongitude() * 1E6);
+        textView.setText("Lat:" + mLatitude + " long:" + mLongtitude);
         //Toast.makeText(getActivity(),
                 //"Location changed. Lat:" + mLatitude + " long:" + mLongtitude,
                 //Toast.LENGTH_LONG).show();
@@ -91,7 +96,14 @@ public class MapFragment extends Fragment implements
             first = false;
         }
         ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-        overlays.add(new OverlayItem("New Overlay", "Overlay Description", gpt));
+        int i = 0;
+        for (i = 0; i < APGlobal.global_list.size(); i++) {
+            GeoPoint point = new GeoPoint(APGlobal.global_list.get(i).getLoc_lat(), APGlobal.global_list.get(i).getLoc_lon());
+            OverlayItem tmp = new OverlayItem(APGlobal.global_list.get(i).getSSID(), APGlobal.global_list.get(i).getType(), point);
+            tmp.setMarker(getActivity().getResources().getDrawable(R.drawable.wifi));
+            overlays.add(tmp);
+        }
+        overlays.add(new OverlayItem("Here", "This is your position", gpt));
         DefaultResourceProxyImpl resourceProxy = new DefaultResourceProxyImpl(getActivity());
         ItemizedIconOverlay<OverlayItem> myLocationOverlay = new ItemizedIconOverlay<OverlayItem>(overlays, null, resourceProxy);
         map.getOverlays().clear();
