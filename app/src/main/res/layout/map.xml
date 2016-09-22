@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -16,5 +15,33 @@
         android:id="@+id/debug"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WEP"
+        android:id="@+id/btn_wep"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WAP/2"
+        android:id="@+id/btn_wap"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/btn_wep"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOT"
+        android:id="@+id/btn_hot"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/btn_wap"/>
+
 
 </RelativeLayout>

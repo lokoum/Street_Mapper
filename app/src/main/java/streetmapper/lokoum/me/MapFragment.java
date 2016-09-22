@@ -12,9 +12,11 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,14 +51,45 @@ public class MapFragment extends Fragment implements
     public static int mLatitude = 34783155;
     public static boolean first = true;
     ArrayList<OverlayItem> mItems;
+    private static boolean isWEP = true;
+    private static boolean isWAP = true;
+    private static boolean isHOT = true;
+
 
     TextView textView;
+    Button  btn_wep;
+    Button  btn_wap;
+    Button  btn_hot;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.map, container, false);
 
         textView = (TextView) v.findViewById(R.id.debug);
+        btn_wep = (Button) v.findViewById(R.id.btn_wep);
+        btn_wep.setBackgroundColor(Color.GREEN);
+        btn_wep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnWEP(v);
+            }
+        });
+        btn_wap = (Button) v.findViewById(R.id.btn_wap);
+        btn_wap.setBackgroundColor(Color.GREEN);
+        btn_wap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnWAP(v);
+            }
+        });
+        btn_hot = (Button) v.findViewById(R.id.btn_hot);
+        btn_hot.setBackgroundColor(Color.GREEN);
+        btn_hot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnHOT(v);
+            }
+        });
         //important! set your user agent to prevent getting banned from the osm servers
         org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
 
@@ -98,6 +131,18 @@ public class MapFragment extends Fragment implements
         ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
         int i = 0;
         for (i = 0; i < APGlobal.global_list.size(); i++) {
+            if (APGlobal.global_list.get(i).getType().equalsIgnoreCase("WEP") && !isWEP) {
+                Log.i("AFF", "SKIP WEP");
+                continue;
+            }
+            if (APGlobal.global_list.get(i).getType().contains("WPA") && !isWAP) {
+                Log.i("AFF", "SKIP WPA");
+                continue;
+            }
+            if (APGlobal.global_list.get(i).getType().equalsIgnoreCase("NO-ENCRYPTION") && !isHOT) {
+                Log.i("AFF", "SKIP HOT");
+                continue;
+            }
             GeoPoint point = new GeoPoint(APGlobal.global_list.get(i).getLoc_lat(), APGlobal.global_list.get(i).getLoc_lon());
             OverlayItem tmp = new OverlayItem(APGlobal.global_list.get(i).getSSID(), APGlobal.global_list.get(i).getType(), point);
             tmp.setMarker(getActivity().getResources().getDrawable(R.drawable.wifi));
@@ -124,5 +169,32 @@ public class MapFragment extends Fragment implements
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void btnWEP(View v) {
+        isWEP = !isWEP;
+        if (isWEP) {
+            btn_wep.setBackgroundColor(Color.GREEN);
+        }
+        else
+            btn_wep.setBackgroundColor(Color.GRAY);
+    }
+
+    public void btnWAP(View v) {
+        isWAP = !isWAP;
+        if (isWAP) {
+            btn_wap.setBackgroundColor(Color.GREEN);
+        }
+        else
+            btn_wap.setBackgroundColor(Color.GRAY);
+    }
+
+    public void btnHOT(View v) {
+        isHOT = !isHOT;
+        if (isHOT) {
+            btn_hot.setBackgroundColor(Color.GREEN);
+        }
+        else
+            btn_hot.setBackgroundColor(Color.GRAY);
     }
 }

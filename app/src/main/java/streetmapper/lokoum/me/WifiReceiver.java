@@ -54,6 +54,7 @@ public class WifiReceiver extends BroadcastReceiver {
                 }
                 if (!MyUtils.isInGlobal(tmp)) {
                     APGlobal.global_list.add(tmp);
+                    APGlobal.textView.setText("Global: " + APGlobal.global_list.size());
                 }
                 else {
                     MyUtils.compare(tmp);
@@ -63,12 +64,11 @@ public class WifiReceiver extends BroadcastReceiver {
                     //compare with b;
                     //add map ou fix pos
                     //clear B
-                    APView.textView.setText("AAAAAA");
+
                 APView.list_a_adapt.notifyDataSetChanged();
                 APGlobal.listAdapter.notifyDataSetChanged();
-
             }
-
+        APView.textView.setText("actual: " + APView.list_a.size());
     }
 
 }
